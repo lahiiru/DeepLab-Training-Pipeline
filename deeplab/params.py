@@ -20,7 +20,7 @@ LOAD_MODEL = False
 NUM_TRAIN_IMAGES = -1 if PROD_SYS else 1000
 NUM_VAL_IMAGES = -1 if PROD_SYS else 50
 
-DATASET_DIR = "dataset"
+DATASET_DIR = "/content/instance-level_human_parsing/instance-level_human_parsing"
 CKPT_DIR = "./output/ckpt"
 TENSORBOARD_DIR = "./output/logs"
 PRED_OUTPUT = "./output/pred"
