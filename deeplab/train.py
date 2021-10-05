@@ -14,7 +14,7 @@ from datetime import datetime
 import datetime
 
 def create_callbacks():
-    lr_callback = ReduceLROnPlateau(monitor='val_loss', factor=0.7, patience=5, min_lr=1e-6)
+    lr_callback = ReduceLROnPlateau(monitor='loss', factor=0.7, patience=5, min_lr=1e-6)
     ckpt_callback = ModelCheckpoint(
         filepath=os.path.join(CKPT_DIR, 'depplabV3plus_epoch-{epoch:02d}_val-loss-{val_loss:.2f}.h5'),
         monitor='val_loss', mode='min'
