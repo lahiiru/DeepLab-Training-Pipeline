@@ -7,7 +7,7 @@
 import numpy as np
 import tensorflow as tf
 
-from deeplab import UpdatedMeanIoU
+from custom_metrics import UpdatedMeanIoU
 from deeplab.dataset import read_image
 
 def load_model(model_path):
