@@ -16,6 +16,7 @@ from deeplab.params import (
     NUM_VAL_IMAGES,
     DATASET_DIR
 )
+AUTOTUNE = tf.data.experimental.AUTOTUNE
 
 train_data_dir = os.path.join(DATASET_DIR, "Training")
 val_data_dir = os.path.join(DATASET_DIR, "Validation")
@@ -48,7 +49,7 @@ def load_data(image_list, mask_list):
 
 def data_generator(image_list, mask_list):
     dataset = tf.data.Dataset.from_tensor_slices((image_list, mask_list))
-    dataset = dataset.map(load_data, num_parallel_calls=tf.data.AUTOTUNE)
+    dataset = dataset.map(load_data, num_parallel_calls=AUTOTUNE)
     dataset = dataset.batch(BATCH_SIZE, drop_remainder=True)
     return dataset
 
