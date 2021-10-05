@@ -7,6 +7,7 @@
 
 import os
 
+from .custom_metrics import UpdatedMeanIoU
 from deeplab.dataset import load_dataset
 from deeplab.params import EPOCHS, CKPT_DIR, TENSORBOARD_DIR, VAL_FREQ
 from tensorflow.keras.callbacks import ReduceLROnPlateau, ModelCheckpoint, TensorBoard, EarlyStopping
@@ -16,7 +17,7 @@ def create_callbacks():
     lr_callback = ReduceLROnPlateau(monitor='loss', factor=0.7, patience=5, min_lr=1e-6)
     ckpt_callback = ModelCheckpoint(
         filepath=os.path.join(CKPT_DIR, 'depplabV3plus_epoch-{epoch:02d}_val-loss-{val_loss:.2f}.h5'),
-        monitor='val_loss', mode='min'
+        monitor=UpdatedMeanIoU
     )
     tb_callback = TensorBoard(log_dir=os.path.join(TENSORBOARD_DIR, datetime.now().strftime("%Y%m%d-%H%M%S")))
     es_callback = EarlyStopping(patience=10)
