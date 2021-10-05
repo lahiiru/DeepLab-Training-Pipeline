@@ -17,7 +17,7 @@ def create_callbacks():
     lr_callback = ReduceLROnPlateau(monitor='loss', factor=0.7, patience=5, min_lr=1e-6)
     ckpt_callback = ModelCheckpoint(
         filepath=os.path.join(CKPT_DIR, 'depplabV3plus_epoch-{epoch:02d}_val-loss-{val_loss:.2f}.h5'),
-        monitor=UpdatedMeanIoU
+        monitor='updated_mean_io_u'
     )
     tb_callback = TensorBoard(log_dir=os.path.join(TENSORBOARD_DIR, datetime.now().strftime("%Y%m%d-%H%M%S")))
     es_callback = EarlyStopping(patience=10)
