@@ -7,7 +7,7 @@ source: https://keras.io/examples/vision/deeplabv3_plus/
 import ssl
 import tensorflow as tf
 
-from custom_metrics import UpdatedMeanIoU
+from .custom_metrics import UpdatedMeanIoU
 from deeplab.params import IMAGE_SIZE, NUM_CLASSES, LEARNING_RATE
 from tensorflow.keras import layers
 
