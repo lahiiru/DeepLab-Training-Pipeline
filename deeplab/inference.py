@@ -6,16 +6,9 @@
 """
 import numpy as np
 import tensorflow as tf
-from deeplab.dataset import read_image
 
-class UpdatedMeanIoU(tf.keras.metrics.MeanIoU):
-  def __init__(self,
-               y_true=None,
-               y_pred=None,
-               num_classes=None,
-               name=None,
-               dtype=None):
-    super(UpdatedMeanIoU, self).__init__(num_classes = num_classes,name=name, dtype=dtype)
+from deeplab import UpdatedMeanIoU
+from deeplab.dataset import read_image
 
 def load_model(model_path):
     deeplab_model = tf.keras.models.load_model(model_path, custom_objects={'UpdatedMeanIoU': UpdatedMeanIoU})

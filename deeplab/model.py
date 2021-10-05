@@ -5,25 +5,13 @@
 source: https://keras.io/examples/vision/deeplabv3_plus/
 """
 import ssl
-
 import tensorflow as tf
+
 from deeplab.params import IMAGE_SIZE, NUM_CLASSES, LEARNING_RATE
 from tensorflow.keras import layers
 
 ssl._create_default_https_context = ssl._create_unverified_context
 
-class UpdatedMeanIoU(tf.keras.metrics.MeanIoU):
-  def __init__(self,
-               y_true=None,
-               y_pred=None,
-               num_classes=None,
-               name=None,
-               dtype=None):
-    super(UpdatedMeanIoU, self).__init__(num_classes = num_classes,name=name, dtype=dtype)
-
-  def update_state(self, y_true, y_pred, sample_weight=None):
-    y_pred = tf.math.argmax(y_pred, axis=-1)
-    return super().update_state(y_true, y_pred, sample_weight)
 
 def convolution_block(
         block_input,
@@ -40,7 +28,7 @@ def convolution_block(
         dilation_rate=dilation_rate,
         padding=padding,
         use_bias=use_bias,
-        kernel_initializer=tf.keras.initializers.GlorotNormal(seed=kernel_seed),  # xavier normal initializer
+        kernel_initializer=tf.keras.initializers.HeNormal(seed=kernel_seed),
     )(block_input)
     x = layers.BatchNormalization()(x)
     return tf.nn.relu(x)
