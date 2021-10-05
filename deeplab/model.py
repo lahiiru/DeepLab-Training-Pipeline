@@ -12,6 +12,18 @@ from tensorflow.keras import layers
 
 ssl._create_default_https_context = ssl._create_unverified_context
 
+class UpdatedMeanIoU(tf.keras.metrics.MeanIoU):
+  def __init__(self,
+               y_true=None,
+               y_pred=None,
+               num_classes=None,
+               name=None,
+               dtype=None):
+    super(UpdatedMeanIoU, self).__init__(num_classes = num_classes,name=name, dtype=dtype)
+
+  def update_state(self, y_true, y_pred, sample_weight=None):
+    y_pred = tf.math.argmax(y_pred, axis=-1)
+    return super().update_state(y_true, y_pred, sample_weight)
 
 def convolution_block(
         block_input,
@@ -79,7 +91,7 @@ def CompileModel(model):
     # Loss, optimizer and metrics
     loss = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True)
     optimizer = tf.keras.optimizers.Adam(learning_rate=LEARNING_RATE)
-    metrics = ["accuracy"]
+    metrics = ["accuracy", UpdatedMeanIoU(num_classes=NUM_CLASSES)]
 
     # Compile the model
     model.compile(

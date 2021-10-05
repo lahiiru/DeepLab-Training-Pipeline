@@ -5,11 +5,11 @@
 @Time:        02/10/2021 00:03
 """
 
-PROD_SYS = False
+PROD_SYS = True
 
-LEARNING_RATE = 1e-5
+LEARNING_RATE = 1e-4
 IMAGE_SIZE = (512, 512)
-BATCH_SIZE = 4
+BATCH_SIZE = 16 # 8
 NUM_CLASSES = 20
 
 WEIGHT_DECAY = 0
@@ -20,8 +20,8 @@ LOAD_MODEL = False
 NUM_TRAIN_IMAGES = -1 if PROD_SYS else 1000
 NUM_VAL_IMAGES = -1 if PROD_SYS else 50
 
-DATASET_DIR = "/content/instance-level_human_parsing/instance-level_human_parsing"
-CKPT_DIR = "./output/ckpt"
+DATASET_DIR = "../instance-level_human_parsing/instance-level_human_parsing"
+CKPT_DIR = "output/ckpt"
 TENSORBOARD_DIR = "./output/logs"
 PRED_OUTPUT = "./output/pred"
-LOAD_MODEL_FILE = 'output/trained_models/depplabV3plus_epoch-10_val-loss-0.76.h5'
+LOAD_MODEL_FILE = 'output/ckpt/depplabV3plus_epoch-02_val-loss-0.48.h5'

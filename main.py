@@ -13,9 +13,8 @@ from deeplab.graph_viz import get_graphs
 from deeplab.inference import load_model
 from deeplab.model import DeeplabV3Plus, CompileModel
 from deeplab.overlay import plot_predictions
-from deeplab.params import IMAGE_SIZE, NUM_CLASSES, LOAD_MODEL_FILE, PRED_OUTPUT
+from deeplab.params import IMAGE_SIZE, NUM_CLASSES, LOAD_MODEL_FILE, PRED_OUTPUT, DATASET_DIR
 from deeplab.train import train
-
 
 def main(is_train):
     if is_train:
@@ -26,8 +25,8 @@ def main(is_train):
         get_graphs(history)
     else:
         deeplab_model = load_model(LOAD_MODEL_FILE)
-        print(deeplab_model.summary())
-        image_list = glob("dataset/Testing/Images/*")[:10]
+        image_list = glob(DATASET_DIR + "/Testing/Images/*")[:10]
+        print(image_list)
         pred_list = plot_predictions(image_list, model=deeplab_model)
         if not os.path.exists(PRED_OUTPUT):
             os.makedirs(PRED_OUTPUT)
