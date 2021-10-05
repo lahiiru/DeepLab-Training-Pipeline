@@ -11,7 +11,6 @@ from deeplab.dataset import load_dataset
 from deeplab.params import EPOCHS, CKPT_DIR, TENSORBOARD_DIR, VAL_FREQ
 from tensorflow.keras.callbacks import ReduceLROnPlateau, ModelCheckpoint, TensorBoard, EarlyStopping
 from datetime import datetime
-import datetime
 
 def create_callbacks():
     lr_callback = ReduceLROnPlateau(monitor='loss', factor=0.7, patience=5, min_lr=1e-6)
